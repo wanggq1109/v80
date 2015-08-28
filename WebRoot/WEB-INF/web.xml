@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	<!-- Spring配置 -->
+	<listener>
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<context-param>
+		<param-name>contextConfigLocation</param-name>
+		<param-value>classpath:spring.*.xml</param-value>
+	</context-param>
+	<!-- spring security -->
+	<filter>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+	</filter>
+	<!-- 拦截所有请求 -->
+	<filter-mapping>
+		<filter-name>springSecurityFilterChain</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Struts2配置 -->
+	<filter>
+		<filter-name>struts2</filter-name>
+		<filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.action</url-pattern>
+	</filter-mapping>
+	<filter-mapping>
+		<filter-name>struts2</filter-name>
+		<url-pattern>*.jsp</url-pattern>
+	</filter-mapping>
+
+
+	<servlet>
+		<servlet-name>UploadServlet</servlet-name>
+		<servlet-class>com.arthouse.background.web.UploadServlet</servlet-class>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>UploadServlet</servlet-name>
+		<url-pattern>/UploadServlet</url-pattern>
+	</servlet-mapping>
+	
+	 <!-- =================ckeditor+ckfinder图片上传功能的配置=================== -->  
+   <servlet>  
+        <!-- servlet的命 名===注册名称，这个名称可以任意的        -->  
+        <servlet-name>ConnectorServlet</servlet-name>  
+        <!-- servlet 所在包  -->  
+        <servlet-class>com.ckfinder.connector.ConnectorServlet</servlet-class>  
+        <init-param>  
+            <!-- 初始化设置 -->  
+            <param-name>XMLConfig</param-name>  
+            <param-value>/WEB-INF/config.xml</param-value>  
+        </init-param>  
+        <init-param>  
+            <!-- 设置是否可以查看debug，在正常时候需要设置为false. -->  
+            <param-name>debug</param-name>  
+            <param-value>false</param-value>  
+        </init-param>  
+   </servlet>  
+	<!-- 映射的相对路径，主要是在其他地方使用，比如js,页面访问  -->  
+    <servlet-mapping>  
+        <servlet-name>ConnectorServlet</servlet-name>  
+        <url-pattern>  
+            /ckfinder/core/connector/java/connector.java  
+        </url-pattern>  
+    </servlet-mapping>  
+  
+<!-- =================ckeditor+ckfinder图片上传功能的配置结束=================== -->  
+	<!-- Hibernate配置 -->
+	<filter>
+		<filter-name>openSessionInView</filter-name>
+		<filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+		<init-param>
+			<param-name>sessionFactoryBeanName</param-name>
+			<param-value>sessionFactory</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>openSessionInView</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+
+	<!-- Encoding配置 -->
+	<filter>
+		<filter-name>encodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>encodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	<!-- 设置session 超时: session-config元素为Web应用中的javax.servlet.http.HttpSession对象定义参数。 
+		session-timeout元素用来指定默认的会话超时时间间隔，以分钟为单位。该元素值必须为整数。 如果session-timeout元素的值为零或负数，则表示会话将永远不会超时。 
+		下面是一个部署描述符，在用户最近访问HttpSession对象20分钟后，HttpSession对象默认为无效。 -->
+	<session-config>
+		<session-timeout>0</session-timeout>
+	</session-config>
+	<!-- 首页 -->
+	<welcome-file-list>
+		<welcome-file>index.jsp</welcome-file>
+	</welcome-file-list>
+</web-app>

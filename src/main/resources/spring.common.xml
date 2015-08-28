@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/tx 
+		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+		http://www.springframework.org/schema/aop 
+		http://www.springframework.org/schema/aop/spring-aop-3.0.xsd
+		http://www.springframework.org/schema/context
+		http://www.springframework.org/schema/context/spring-context-3.0.xsd">
+	<context:annotation-config />
+	<context:component-scan base-package="com.arthouse" />
+
+	<bean
+		class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="locations">
+			<value>classpath:jdbc.properties</value>
+		</property>
+	</bean>
+
+	<bean id="messageSource"
+		class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+		<property name="basename" value="classpath:messages_zh_CN" />
+	</bean>
+
+
+	<bean id="dataSource" destroy-method="close"
+		class="org.apache.commons.dbcp.BasicDataSource">
+		 <property name="driverClassName" value="${jdbc.driverClassName}"/>
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<property name="maxIdle" value="10" />
+		<property name="maxActive" value="100" />
+		<property name="maxWait" value="10000" />
+		<property name="validationQuery" value="select 1" />
+		<property name="testOnBorrow" value="false" />
+		<property name="testWhileIdle" value="true" />
+		<property name="timeBetweenEvictionRunsMillis" value="1200000" />
+		<property name="minEvictableIdleTimeMillis" value="1800000" />
+		<property name="numTestsPerEvictionRun" value="5" />
+		<property name="defaultAutoCommit" value="true" />
+	</bean>
+
+	<!-- spring security自带的与权限有关的数据读写Jdbc模板 -->
+	<bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 设置权限的前缀为AUTH_，而不是ROLE_ -->
+	<bean id="roleVoter" class="org.springframework.security.access.vote.RoleVoter">
+		<property name="rolePrefix" value="AUTH_" />
+	</bean>
+	<!-- 事件监听:实现了 ApplicationListener监听接口, 包括AuthenticationCredentialsNotFoundEvent 
+		事件， AuthorizationFailureEvent事件，AuthorizedEvent事件， PublicInvocationEvent事 
+		件。 -->
+	<bean
+		class="org.springframework.security.authentication.event.LoggerListener" />
+
+
+
+	<!-- 用户的密码加密或解密 -->
+	<bean id="passwordEncoder"
+		class="org.springframework.security.authentication.encoding.Md5PasswordEncoder" />
+
+	<!-- 用户详细信息管理：数据源、（通过数据库管理用户、角色、权限、资源） -->
+	<bean id="userDetailsManager" class="com.arthouse.security.CustomUserDetailsService">
+		<property name="sysUsersDao" ref="sysUsersDao" />
+		<property name="sysAuthoritiesResourcesDao" ref="sysAuthoritiesResourcesDao" />
+		<property name="dataSource" ref="dataSource" />
+		<!-- <property name="userCache" ref="userCache" /> -->
+	</bean>
+
+
+	<!-- dao配置 -->
+	<bean id="sysUsersDao" class="com.arthouse.security.dao.SysUsersDao"
+		parent="hibernateTemplate">
+		<property name="passwordEncoder" ref="passwordEncoder" />
+		<property name="sysRolesDao" ref="sysRolesDao"></property>
+	</bean>
+
+	<bean id="sysRolesDao" class="com.arthouse.security.dao.SysRolesDao"
+		parent="hibernateTemplate">
+	</bean>
+
+	<bean id="sysAuthoritiesResourcesDao" class="com.arthouse.security.dao.SysAuthoritiesResourcesDao"
+		parent="hibernateTemplate">
+	</bean>
+
+	<bean id="sessionFactory"
+		class="org.springframework.orm.hibernate3.annotation.AnnotationSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<property name="packagesToScan">
+			<list>
+				<!-- <value>com.s2sh.page.model</value> -->
+				<value>com.arthouse.common.domain</value>
+				<value>com.arthouse.security.entity</value>
+			</list>
+		</property>
+		<property name="hibernateProperties">
+			<props>
+				<prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+				<prop key="hibernate.show_sql">false</prop>
+				<prop key="hibernate.hbm2ddl.auto">update</prop>
+			</props>
+		</property>
+	</bean>
+
+	<bean id="hibernateTemplate" class="org.springframework.orm.hibernate3.HibernateTemplate">
+		<property name="sessionFactory" ref="sessionFactory"></property>
+	</bean>
+
+	<bean id="txManager"
+		class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+		<property name="sessionFactory" ref="sessionFactory" />
+	</bean>
+
+	<aop:config>
+		<aop:pointcut id="bussinessService"
+			expression="execution(public * com.arthouse.goldfish.service.*.*(..))" />
+		<aop:advisor pointcut-ref="bussinessService" advice-ref="txAdvice" />
+	</aop:config>
+	
+
+	<tx:advice id="txAdvice" transaction-manager="txManager">
+		<tx:attributes>
+			  <tx:method name="get*" read-only="true" />
+			  <tx:method name="add*" propagation="REQUIRED"/>
+              <tx:method name="update*" propagation="REQUIRED"/>
+              <tx:method name="delete*" propagation="REQUIRED" rollback-for="java.lang.Throwable"/>
+		</tx:attributes>
+	</tx:advice>
+</beans>

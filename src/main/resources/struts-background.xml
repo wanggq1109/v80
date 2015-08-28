@@ -1,0 +1,738 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+
+	<package name="arthouseBack" extends="struts-default">
+		<!--作品分类  -->
+		<action name="phototype" class="photoTypeAction" method="photoType_init">
+			<result name="success">/jsp/systemManage/type_Manage.jsp</result>
+		</action>
+		
+		<!-- 摄影作品主题 -->
+		<action name="photoworktopic" class="photoTopicAction" method="photoworkstopic_Init">
+		<result name="success">/jsp/background/photoTopic.jsp</result>
+		</action>
+		
+		<!-- 显示当前主题下摄影作品 -->
+		<action name="showPhotosByTopic" class="photoTopicAction" method="showPhotosByTopic">
+		<result name="success">/jsp/background/photoTopicList.jsp</result>
+		</action>
+		
+		<!-- 摄影作品主题 的列表-->
+		<action name="photoworktopicforphotos" class="photoTopicAction" method="showtopicforphotos">
+		<result name="success">/jsp/background/photoTopicEdit.jsp</result>
+		</action>
+		
+		<!-- 摄影作品 -->
+		<action name="photoworkshow" class="photoworksAction" method="photoworks_Init">
+			<result name="success">/jsp/background/photoworks.jsp</result>
+		</action>
+		<!-- 幻灯片导航-->
+		<action name="slideshow_init" class="slideShowAction" method="slideShow_init">
+			<result name="success">/jsp/background/slideshow.jsp</result>
+		</action>
+		<!-- 微电影-->
+		<action name="video_init" class="VideoShowAction" method="video_init">
+			<result name="success">/jsp/background/video_Manage.jsp</result>
+		</action>
+		<action name="videoInfo_add" class="VideoShowAction" method="video_add">
+			<result name="success">/jsp/background/video_Edit.jsp</result>
+		</action>
+		<action name="videoInfo_save" class="VideoShowAction" method="film_save">
+			<result name="success">/jsp/background/video_Edit.jsp</result>
+		</action>
+		
+		<action name="videoInfo_edit" class="VideoShowAction" method="film_edit_init">
+			<result name="success">/jsp/background/video_Edit.jsp</result>
+		</action>
+		
+		<action name="videoInfo_edit_save" class="VideoShowAction" method="film_edit_save">
+			<result name="success">/jsp/background/video_Edit.jsp</result>
+		</action>
+		
+		<!-- 团购订单 -->
+		<action name="orderGroup_init" class="orderGroupAction" method="orderGroup_init">
+			<result name="success">/jsp/background/order_group.jsp</result>
+		</action>
+		
+		<!-- 团购管理 -->
+		<action name="orderManager_init" class="orderGroupAction" method="orderManager_init">
+			<result name="success">/jsp/background/group_Manage.jsp</result>
+		</action>
+		
+		<!-- 团购编辑页面 -->
+		<action name="grouporderEdit_init" class="orderGroupAction" method="orderGroupEdit_init">
+			<result name="success">/jsp/background/group_Edit.jsp</result>
+		</action>
+		
+		<!--团购信息新增  -->
+		 <action name="groupitemsInfo_add" class="orderGroupAction" method="groupitemsInfo_add">
+			<result name="success">/jsp/background/group_Edit.jsp</result>
+		</action>
+		
+		<!--团购信息編輯  -->
+		 <action name="groupitemsInfo_edit" class="orderGroupAction" method="groupitemsInfo_edit">
+			<result name="success">/jsp/background/group_Edit.jsp</result>
+		</action>
+		
+		<!--新闻 -->
+		<action name="news_init" class="newsAction" method="news_init">
+			<result name="success">/jsp/background/news_Manage.jsp</result>
+		</action>
+		<action name="newsInfo_add" class="newsAction" method="news_add">
+			<result name="success">/jsp/background/news_Edit.jsp</result>
+		</action>
+		
+		<action name="newsInfo_eidt" class="newsAction" method="newInfo_edit">
+			<result name="success">/jsp/background/news_Edit.jsp</result>
+		</action>
+		
+		<action name="newsinfoEdit_save" class="newsAction" method="newsinfo_edit_save">
+			<result name="success">/jsp/background/news_Edit.jsp</result>
+		</action>
+		
+		<action name="newSave" class="newsAction" method="news_save">
+			<result name="success">/jsp/background/news_Edit.jsp</result>
+		</action>
+		
+		<!-- 工作室介绍 -->
+		<action name="studio_init" class="studioIntroAction" method="studio_init">
+			<result name="success">/jsp/background/studioIntro.jsp</result>
+		</action>
+		
+		<!--工作室内容添加 -->
+		 <action name="studio_add" class="studioIntroAction" method="studio_add">
+			<result name="success">/jsp/background/studioIntro.jsp</result>
+		</action>
+		
+		<!--工作室服务 -->
+		 <action name="studio_service_init" class="studioIntroAction" method="studio_service_init">
+			<result name="success">/jsp/background/studioService.jsp</result>
+		</action>
+		
+		<!--员工信息 -->
+		 <action name="employee_init" class="studioIntroAction" method="employee_init">
+			<result name="success">/jsp/background/employeeInfo.jsp</result>
+		</action>
+		
+		<!--招聘信息 -->
+		 <action name="zhaopin_init" class="studioIntroAction" method="zhaopin">
+			<result name="success">/jsp/background/recruitment.jsp</result>
+		</action>
+		
+		<!--作品主题 -->
+		 <action name="emphototopic_init" class="studioIntroAction" method="phototopic_init">
+			<result name="success">/jsp/background/employWorksTopic.jsp</result>
+		</action>
+		
+		<!--主题作品-->
+		 <action name="employeePhotoshow" class="studioIntroAction" method="show_employeePhoto">
+			<result name="success">/jsp/background/employeePhotos.jsp</result>
+		</action>
+		
+		<!--客片分享-->
+		 <action name="customerInfoshow" class="customerphotosAction" method="customer_init">
+			<result name="success">/jsp/background/costomer.jsp</result>
+		</action>
+		
+		<!--客片作品列表-->
+		 <action name="customerInfophotosshow" class="customerphotosAction" method="customerphotos_init">
+			<result name="success">/jsp/background/costomer_Photos.jsp</result>
+		</action>
+		
+	</package>
+
+	<!--json -->
+	<package name="v80-json" extends="json-default" namespace="/myjson">
+		
+		<!-- 作品类型管理    start-->
+		<action name="getphtotoTypeTree" class="photoTypeAction" method="getPhotoTypeTreeData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!-- 加载树形数据 -->
+		<action name="getphtotoTypeData" class="photoTypeAction" method="photoTypeData_query">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!-- 添加类型树 -->
+		<action name="photoTypeadd" class="photoTypeAction" method="photoType_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<action name="photoTypeUpdate" class="photoTypeAction" method="photoType_update">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<action name="photoTypeDelete" class="photoTypeAction" method="photoType_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+	  <!-- 摄影作品    start-->
+	  <action name="photoWorksTreeData" class="photoworksAction" method="getPhotoWorksTreeData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		 <action name="photoWorksDataList" class="photoworksAction" method="getPhotoWorksDataList">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		 
+		<action name="photoWorksDesc" class="photoworksAction" method="photoworksGroupDesc_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<action name="photoworkssuolue_picture" class="photoworksAction" method="Photoworkssuoluepic_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<action name="photoWorks_delete" class="photoworksAction" method="photoWorks_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!-- 选择发布 -->
+		<action name="photoWorks_release" class="photoworksAction" method="photoWorks_release">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 设置作品封面-->
+		<action name="photoworksedit_facephots" class="photoworksAction" method="photoworksedit_facephots">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 一周推荐设置 -->
+		<action name="photoWorks_weekrecommend" class="photoworksAction" method="photoWorks_weekrecommend">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 整体发布 -->
+		<action name="photoWorks_release_all" class="photoworksAction" method="Photoworks_all_release">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!-- 幻灯片 -->
+		 <action name="slideShowData" class="slideShowAction" method="getPhotoWorksDataList">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!-- 删除幻灯片 -->
+		 <action name="slideshow_delete" class="slideShowAction" method="slideShow_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 发布幻灯片 -->
+		 <action name="slideshow_release" class="slideShowAction" method="slideshow_release">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 发布新闻 -->
+		 <action name="news_release" class="newsAction" method="news_release">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 微电影数据查询 -->
+		 <action name="videoInfoShow" class="VideoShowAction" method="getVideoInfo">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 微电影上传-->
+		 <action name="videoInfoShowUpload" class="VideoShowAction" method="weifilm_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 微电影缩略图上传-->
+		 <action name="videosuoluepicupload" class="VideoShowAction" method="videosuoluepic_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!-- 新闻列表缩略图上传-->
+		 <action name="newssuoluepic_upload" class="newsAction" method="newssuoluepic_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!-- 微电影删除-->
+		 <action name="videoInfo_delete" class="VideoShowAction" method="videoInfo_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--团购订单查询  -->
+		 <action name="orderGroupDataQuery" class="orderGroupAction" method="getGroupOrderData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--团购信息查询  -->
+		 <action name="showGroupItemInfo" class="orderGroupAction" method="showGroupItemInfo">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		
+		<!--团购信息刪除  -->
+		 <action name="groupItems_delete" class="orderGroupAction" method="groupItems_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--团购列表缩略图  -->
+		 <action name="groupitemsuoluepic_upload" class="orderGroupAction" method="groupitemsuoluepic_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--新闻 查询 -->
+		 <action name="newQuery" class="newsAction" method="getnewsInfo">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--新闻 删除 -->
+		 <action name="newdelete" class="newsAction" method="newsInfo_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室图片列表-->
+		 <action name="studioPhotoQuery" class="studioIntroAction" method="getstudioPhoto">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室服务列表-->
+		 <action name="studioServiceQuery" class="studioIntroAction" method="getstudioDatafw">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室新增服务-->
+		 <action name="studioServiceadd" class="studioIntroAction" method="studiofw_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室服务编辑-->
+		 <action name="studioServicedit" class="studioIntroAction" method="studiofw_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室服务删除-->
+		 <action name="studioServicdelete" class="studioIntroAction" method="studiofw_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--工作室简介照片删除-->
+		 <action name="studiophotodelete" class="studioIntroAction" method="studiophoto_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--员工信息查询-->
+		 <action name="eployeedataQuery" class="studioIntroAction" method="getEmployeeData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--员工信息增加-->
+		 <action name="eployeedataAdd" class="studioIntroAction" method="employee_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--员工信息编辑-->
+		 <action name="eployeedataEdit" class="studioIntroAction" method="employee_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--员工信息删除-->
+		 <action name="eployeedataDelete" class="studioIntroAction" method="employee_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--员工信息删除-->
+		 <action name="eployeephotoUpload" class="studioIntroAction" method="employeePhoto_upload">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--招聘信息查询-->
+		 <action name="recruimentQuery" class="studioIntroAction" method="getRecruimentData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!--招聘信息增加-->
+		 <action name="recruimentAdd" class="studioIntroAction" method="recruiment_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!--招聘信息编辑-->
+		 <action name="recruimentEdit" class="studioIntroAction" method="recruiment_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!--招聘信息删除-->
+		 <action name="recruimentDelete" class="studioIntroAction" method="recruiment_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--摄影作品主题查询-->
+		 <action name="photoWorksTopicDataQuery" class="photoTopicAction" method="getPhotosWorksTopicData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--摄影作品主题增加-->
+		 <action name="photoWorksTopicAdd" class="photoTopicAction" method="photoworksTopic_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--摄影作品主题编辑-->
+		 <action name="photoWorksTopicEdit" class="photoTopicAction" method="photoworksTopic_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!--摄影作品主题删除-->
+		 <action name="photoWorksTopicDelete" class="photoTopicAction" method="photoworkstopic_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		
+		
+		<!--作品主题查询-->
+		 <action name="photoTopicDataQuery" class="studioIntroAction" method="getPhotoTopicData">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--作品主题增加-->
+		 <action name="photoTopicDataAdd" class="studioIntroAction" method="photoTopic_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--作品主题编辑-->
+		 <action name="photoTopicDataEdit" class="studioIntroAction" method="photoTopic_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--作品主题删除-->
+		 <action name="photoTopicDataDelete" class="studioIntroAction" method="phototopic_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!--备选主题-->
+		 <action name="toselecttopic_list" class="studioIntroAction" method="toselecttopic_list">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		<!--已选主题-->
+		 <action name="topicforselected" class="studioIntroAction" method="topicforselected">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--编辑已选主题-->
+		 <action name="topicselected_edit" class="studioIntroAction" method="topicselected_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--客片分享新增-->
+		 <action name="customerInfo_add" class="customerphotosAction" method="customerInfo_add">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--客片分享查询-->
+		 <action name="getCustomerInfo" class="customerphotosAction" method="getCustomerInfo">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--客片分享编辑-->
+		 <action name="customerInfo_edit" class="customerphotosAction" method="customerInfo_edit">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		<!--客片分享删除-->
+		 <action name="customer_delete" class="customerphotosAction" method="customer_delete">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--客片作品列表-->
+		 <action name="customerphotosListshow" class="customerphotosAction" method="getPhotoWorksDataList">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--客片作品删除-->
+		 <action name="customerphotosdelete" class="customerphotosAction" method="delete_phots">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		<!--设置客片列表组封面-->
+		 <action name="customerphotossetfacephots" class="customerphotosAction" method="edit_facephots">
+			<result name="root" type="json">
+				<param name="excludeProperties">templateList</param>
+			</result>
+			<result name="input">jsp/background/main.jsp</result>
+		</action>
+		
+		
+		
+	</package>
+
+	<package name="main" extends="struts-default">
+
+		<!-- 登录页面 -->
+		<action name="login" class="MainAction" method="login">
+			<result name="success">login.jsp</result>
+		</action>
+
+		<!-- 主界面 -->
+		<action name="main" class="MainAction" method="main">
+			<result name="success">/jsp/background/main.jsp</result>
+			<result name="false">/login.jsp</result>
+		</action>
+
+		<!-- 修改密码 -->
+		<action name="change_Password" class="MainAction" method="changePassword"></action>
+		<!-- 注销 -->
+		<action name="cancel_lation" class="MainAction" method="cancellation">
+			<result name="success">/login.jsp</result>
+		</action>
+	</package>
+
+	<!--用户管理 -->
+	<package name="systemManage" extends="struts-default">
+		<action name="user_*" class="UserAction" method="User_{1}">
+			<result name="manage">jsp/systemManage/user_Manage.jsp</result>
+			<result name="edit">jsp/systemManage/user_Edit.jsp</result>
+			<result name="show">jsp/systemManage/user_View.jsp</result>
+		</action>
+		<action name="getrolelist" class="UserAction" method="role_list">
+			<result name="success">jsp/systemManage/user_Manage.jsp</result>
+		</action>
+		<action name="getrolelist2" class="UserAction" method="role_list2">
+			<result name="success">jsp/systemManage/user_Manage.jsp</result>
+		</action>
+		<action name="user_role_edit" class="UserAction" method="user_role_edit">
+			<result name="success">jsp/systemManage/user_Manage.jsp</result>
+		</action>
+
+		<!--权限管理 -->
+		<action name="sysAuthority_*" class="SysAuthorityAction"
+			method="sysAuthority_{1}">
+			<result name="manage">jsp/systemManage/sysAuthority_Manage.jsp</result>
+			<result name="edit">jsp/systemManage/sysAuthority_Manage.jsp</result>
+		</action>
+		<action name="getresourceslist" class="SysAuthorityAction"
+			method="getresourceslist">
+			<result name="success">jsp/systemManage/sysAuthority_Manage.jsp</result>
+		</action>
+		<action name="getresourceslist2" class="SysAuthorityAction"
+			method="getresourceslist2">
+			<result name="success">jsp/systemManage/sysAuthority_Manage.jsp</result>
+		</action>
+		<action name="authorities_resources_edit" class="SysAuthorityAction"
+			method="authorities_resources_edit">
+			<result name="success">jsp/systemManage/sysAuthority_Manage.jsp</result>
+		</action>
+
+		<!--角色 -->
+		<action name="role_*" class="RoleAction" method="Role_{1}">
+			<result name="manage">jsp/systemManage/role_Manage.jsp</result>
+			<result name="edit">jsp/systemManage/role_Manage.jsp</result>
+		</action>
+		<action name="getauthoritieslist" class="RoleAction" method="getauthoritieslist">
+			<result name="success">jsp/systemManage/role_Manage.jsp</result>
+		</action>
+		<action name="getauthoritieslist2" class="RoleAction" method="getauthoritieslist2">
+			<result name="success">jsp/systemManage/role_Manage.jsp</result>
+		</action>
+		<action name="role_authorities_edit" class="RoleAction"
+			method="role_authorities_edit">
+			<result name="success">jsp/systemManage/role_Manage.jsp</result>
+		</action>
+
+		<!--资源 -->
+		<action name="resources_*" class="ResourcesAction" method="resources_{1}">
+			<result name="manage">jsp/systemManage/resource_Manage.jsp</result>
+			<result name="edit">jsp/systemManage/resource_Manage.jsp</result>
+		</action>
+
+		<action name="bussupd_*" class="BussupdAction" method="bussupd_{1}">
+			<result name="manage">jsp/systemManage/bussupd.jsp</result>
+			<result name="edit">jsp/systemManage/bussupd.jsp</result>
+		</action>
+
+
+		<!--日志 -->
+		<action name="log_*" class="LogAction" method="log_{1}">
+			<result name="manage">jsp/systemManage/log_Manage.jsp</result>
+		</action>
+	</package>
+
+</struts>

@@ -1,0 +1,29 @@
+* {padding:0;margin:0;border:0;}
+body {background-color: #fff;height: 100%;font-family:Î¢ÈíÑÅºÚ, Verdana, Arial, ËÎÌå;height: 100%;}
+.lbg{border-bottom:1px solid #414042;}
+.ltw{border-top:1px solid #fff;}
+.pt10{ padding:10px 0 0 0;}
+.top-logo {width: 250px;height: 90px;background: url("../images/logo.png");float: left;}
+.top-user {float: left;margin: 35px 0 0 50px;color: #E6E7E8;font-size: 14px;}
+.top-user span {background: url("../images/icon_avatar.png");width: 15px;height: 15px;display: block;float: left;margin: 3px 20px 0 0;}
+.top-search {float: right;margin: 28px 30px 0 0;}
+.top-search input {background: #58595B;width: 300px;height: 36px;border: 0px;color: #939598;padding-left: 15px;font-size: 14px;line-height: 36px;}
+.top-set {width: 180px;height: 40px;border: 0px;float: right;margin: 25px 30px 0 0;}
+.set {width: 40px;height: 40px;float: left;cursor: pointer;margin: 0 10px 0 10px;}
+.ico1 {background: url("../images/icon_other.png") 0px 0px;}
+.ico1:hover {background: url("../images/icon_other.png") 0px 200px;}
+.ico2 {background: url("../images/icon_other.png") 0px 160px;}
+.ico2:hover {background: url("../images/icon_other.png") 0px 120px;}
+.ico3 {background: url("../images/icon_other.png") 0px 80px;}
+.ico3:hover {background: url("../images/icon_other.png") 0px 40px;}
+.left-menu {width: 100%;margin: 0px;}
+.left-ico1 {margin: 13px 0 0 13px;background: url("../images/icon_nav.png") 0px 0px;width: 25px;height: 21px;float: left;}
+.left-ico2 {margin: 15px 0 0 13px;background: url("../images/icon_nav.png") 0px 81px;width: 25px;height: 18px;float: left;}
+.left-ico3 {margin: 13px 0 0 13px;background: url("../images/icon_nav.png") 0px 45px;width: 23px;height: 22px;float: left;}
+.left-ico4 {margin: 13px 0 0 13px;background: url("../images/icon_nav.png") 0px 123px;width: 23px;height: 22px;float: left;}
+.left-menu span {height: 45px;width: 100%;border-top: 1px solid #737477;border-bottom: 1px solid #626264;display: block;cursor: pointer;background: #4D4D4F;}
+.left-menu span:hover {background: #F15A29;border-top: 1px solid #737477;border-bottom: 1px solid #626264;}
+.left-menu span p {font-size: 15px;color: #E6E7E8;margin: 13px 0 0 80px;letter-spacing: 2px;}
+.left-menu ul {padding:0;}
+.left-menu ul li {font-size: 14px;color:#E6E7E8;height:40px;line-height:40px;padding:0 0 0 70px;cursor: pointer;list-style-type: none;letter-spacing: 2px;border-bottom: 1px solid #4E4C4C;}
+.left-menu ul li:hover {color:#F15A29;background:#444343}

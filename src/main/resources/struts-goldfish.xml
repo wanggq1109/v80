@@ -1,0 +1,232 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC 
+    "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+    "http://struts.apache.org/dtds/struts-2.0.dtd">
+
+<struts>
+	<package name="art" extends="struts-default">
+		<!--首页 -->
+		<action name="index" class="indexAction" method="index_init">
+			<result name="success">/jsp/goldfish/index.jsp</result>
+		</action>
+		<!-- 摄影作品二级页面 -->
+		<action name="photoListforTopic" class="photoListAction"
+			method="photoListbyTopicId">
+			<result name="success">/jsp/goldfish/photography_content.jsp</result>
+		</action>
+		
+		<!-- 摄影作品二级页面forweek -->
+		<action name="photoListforTopicweek" class="photoListAction"
+			method="photoListbyTopicIdweek">
+			<result name="success">/jsp/goldfish/photography_content_week.jsp</result>
+		</action>
+		
+		<!-- 礼服赏析详情页面 -->
+		<action name="dressphotoListforTopic" class="photoListAction"
+			method="dressPhotsSecnd_init">
+			<result name="success">/jsp/goldfish/canonicals_content.jsp</result>
+		</action>
+		
+		<!-- 礼服赏析菜单页 -->
+		<action name="dressshowmenu" class="photoListAction"
+			method="dressshowmenu">
+			<result name="success">/jsp/goldfish/canonicals_list.jsp</result>
+		</action>
+
+		<!--礼服欣赏 -->
+		<action name="canonicals_list" class="indexAction" method="canonicals_list">
+			<result name="success">/jsp/goldfish/canonicals_list.jsp</result>
+		</action>
+		<!--顾客评价 -->
+		<action name="estimate" class="indexAction" method="estimate">
+			<result name="success">/jsp/goldfish/estimate.jsp</result>
+		</action>
+		<!--客片 -->
+		<action name="showcase" class="indexAction" method="showcase">
+			<result name="success">/jsp/goldfish/showcase.jsp</result>
+		</action>
+		<!--团购活动 -->
+		<action name="group_list" class="indexAction" method="group_list">
+			<result name="success">/jsp/goldfish/group_list.jsp</result>
+		</action>
+		<!--团购活动详情 -->
+		<action name="group_content" class="indexAction" method="group_content">
+			<result name="success">/jsp/goldfish/group_content.jsp</result>
+		</action>
+		<!--微电影 -->
+		<action name="microfilm_init" class="microFilmAction" method="film_init">
+			<result name="success">/jsp/goldfish/microfilm.jsp</result>
+		</action>
+		<!--摄影作品 -->
+		<action name="photography_list" class="indexAction" method="photography_list">
+			<result name="success">/jsp/goldfish/photography_list.jsp</result>
+		</action>
+		<!--联系我们 -->
+		<action name="studio_contact" class="indexAction" method="studio_contact">
+			<result name="success">/jsp/goldfish/studio_contact.jsp</result>
+		</action>
+		<!--80视觉招聘 -->
+		<action name="studio_recruit" class="indexAction" method="studio_recruit">
+			<result name="success">/jsp/goldfish/studio_recruit.jsp</result>
+		</action>
+		<!--80视觉服务 -->
+		<action name="studio_service" class="indexAction" method="studio_service">
+			<result name="success">/jsp/goldfish/studio_service.jsp</result>
+		</action>
+		<!--80视觉团队 -->
+		<action name="studio_team" class="indexAction" method="studio_team">
+			<result name="success">/jsp/goldfish/studio_team.jsp</result>
+		</action>
+		<!--工作室简介 -->
+		<action name="studioInfo" class="studionAction" method="studio">
+			<result name="success">/jsp/goldfish/studio.jsp</result>
+		</action>
+		
+		<!--工作室员工信息 -->
+		<action name="studioemployeePhoto" class="studionAction" method="showallEmployee">
+			<result name="success">/jsp/goldfish/studio_team.jsp</result>
+		</action>
+		
+		<!--工作室员工详细信息 -->
+		<action name="studioemployeePhotoshow" class="studionAction" method="teamshow">
+			<result name="success">/jsp/goldfish/studio_team_show.jsp</result>
+		</action>
+		<!--新闻 -->
+		<action name="newsinfolistshow" class="newsinfoAction" method="newsinfoList_show">
+			<result name="success">/jsp/goldfish/news_list.jsp</result>
+		</action>
+		<!--新闻 详情-->
+		<action name="shownews_content" class="newsinfoAction" method="show_news">
+			<result name="success">/jsp/goldfish/news_content.jsp</result>
+		</action>
+		
+		<!--视觉团队 -->
+		<action name="studio_team_show" class="indexAction" method="studio_team_show">
+			<result name="success">/jsp/goldfish/studio_team_show.jsp</result>
+		</action>
+
+		<!--客片分享 -->
+		<action name="customerPhotoShare" class="customerPhotosShareAction" method="customerPhotos_init">
+			<result name="success">/jsp/goldfish/showcase.jsp</result>
+		</action>
+		
+		<!--客片分享详情页 -->
+		<action name="showcase_content_init" class="customerPhotosShareAction" method="showcase_content_init">
+			<result name="success">/jsp/goldfish/showcase_content.jsp</result>
+		</action>
+		
+		<!--热门景点列表页 -->
+		<action name="hotspotsshow_init" class="customerPhotosShareAction" method="hotspotsshow_init">
+			<result name="success">/jsp/goldfish/hotspotsList.jsp</result>
+		</action>
+		
+		
+		<!--热门景点详情页-->
+		<action name="hotspotscontent_init" class="customerPhotosShareAction" method="hotspot_content">
+			<result name="success">/jsp/goldfish/hotspots_content.jsp</result>
+		</action>
+		
+
+
+	</package>
+
+	<package name="common" extends="struts-default">
+		<result-types>
+			<result-type name="json" class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+	</package>
+
+	<package name="basicdata" extends="common">
+
+		<action name="ajaxPhotos" class="photoListAction" method="ajaxPhotosdata">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<action name="ajaxPhotosweek" class="photoListAction" method="ajaxPhotosdataforweek">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<!-- 分页显示所有摄影主题或者服装主题 -->
+		<action name="ajaxPhotosTopicnewShow" class="photoListAction" method="ajaxPhotoTopicAllShow">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<!-- 分页显示摄影作品和服装赏析根据不同code显示其类型-->
+		<action name="ajaxPhotoTopicShowbyCode" class="photoListAction" method="ajaxPhotoTopicShowbyCode">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		<!-- 分页显示所有微电影 -->
+		<action name="ajaxforMicroFilmPage" class="microFilmAction" method="ajaxforMicroFilmPage">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<!-- 分页显示新闻列表 -->
+		<action name="ajaxnewsInfopage" class="newsinfoAction" method="ajaxnewsInfo_page">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		
+		<!-- 分页显示活动团购列表 -->
+		<action name="ajaxGroupItemInfopage" class="GroupItemsAction" method="ajaxgroupItems_page">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<!-- 分页客片显示列表-->
+		<action name="ajaxCustomerPhotoShowbyMonth" class="customerPhotosShareAction" method="ajaxCustomerPhotoShowbyMonth">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		<!-- 当前用户下所有客片-->
+		<action name="ajaxcustomerPhotosdata" class="customerPhotosShareAction" method="ajaxcustomerPhotosdata">
+			<result name="success" type="json">
+				<param name="root">ret1</param>
+				<param name="noCache">true</param>
+				<param name="ignoreHierarchy">false</param>
+				<param name="contentType">text/html</param>
+			</result>
+		</action>
+		
+		
+		
+
+	</package>
+
+</struts>

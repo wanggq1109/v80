@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+	<bean id="arthouse.dao" class="com.arthouse.common.dao.impl.CommonDao"
+		parent="hibernateTemplate">
+	</bean>
+
+	<!-- TempletService -->
+	<bean id="TemplateManager" class="com.s2sh.page.service.impl.TemplateManagerImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+	<!-- 作品类型 -->
+	<bean id="photoTypeService"
+		class="com.arthouse.background.service.impl.PhotoTypeServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+	<!-- 摄影作品 -->
+	<bean id="photoWorksService"
+		class="com.arthouse.background.service.impl.PhotoWorksServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+	<!-- 微电影 -->
+	<bean id="videoInfoService"
+		class="com.arthouse.background.service.impl.VideoInfoServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<!-- 团购订单 -->
+	<bean id="orderService"
+		class="com.arthouse.background.service.impl.OrderGroupServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<!-- 新闻 -->
+	<bean id="newsService"
+		class="com.arthouse.background.service.impl.NewsInfoServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+
+	<!-- 工作室 -->
+	<bean id="studioService" class="com.arthouse.background.service.impl.StudioServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+	
+	<!-- 客片信息-->
+	<bean id="customerService" class="com.arthouse.background.service.impl.CustomerServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+
+	<!-- spring security 系统级dao start -->
+	<bean id="sysUsersRolesDao" class="com.arthouse.security.dao.SysUsersRolesDao"
+		parent="hibernateTemplate">
+	</bean>
+	<bean id="sysResourcesDao" class="com.arthouse.security.dao.SysResourcesDao"
+		parent="hibernateTemplate">
+	</bean>
+	<bean id="sysAuthoritiesDao" class="com.arthouse.security.dao.SysAuthoritiesDao"
+		parent="hibernateTemplate">
+	</bean>
+
+	<bean id="sysRolesAuthoritiesDao" class="com.arthouse.security.dao.SysRolesAuthoritiesDao"
+		parent="hibernateTemplate">
+	</bean>
+	<bean id="UserDetailService" class="com.arthouse.security.UserDetailsServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+		<property name="sysUsersDao" ref="sysUsersDao" />
+		<property name="sysRolesDao" ref="sysRolesDao" />
+		<property name="sysAuthoritiesDao" ref="sysAuthoritiesDao" />
+		<property name="sysResourcesDao" ref="sysResourcesDao" />
+
+	</bean>
+
+	<bean id="userService"
+		class="com.arthouse.background.systemManage.service.impl.UserServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<bean id="userDetailsService"
+		class="com.arthouse.background.systemManage.service.impl.UserDetailsServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<bean id="sysAuthorityService"
+		class="com.arthouse.background.systemManage.service.impl.SysAuthorityServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<bean id="roleService"
+		class="com.arthouse.background.systemManage.service.impl.RoleServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<bean id="resourceService"
+		class="com.arthouse.background.systemManage.service.impl.ResourceServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<bean id="logService"
+		class="com.arthouse.background.systemManage.service.impl.LogServiceImpl">
+		<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+	<!-- 前台service -->
+	<bean id="indexService" class="com.arthouse.goldfish.service.impl.IndexServiceImpl">
+	<property name="dao" ref="arthouse.dao" />
+	</bean>
+
+</beans>

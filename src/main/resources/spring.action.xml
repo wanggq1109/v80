@@ -1,0 +1,153 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans default-autowire="byName"
+	xmlns="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- TemplateAction -->
+	<bean id="TemplateAction" class="com.s2sh.page.web.TemplateAction">
+		<property name="templateManager" ref="TemplateManager" />
+	</bean>
+
+	<bean id="MainAction" class="com.arthouse.base.web.MainAction"
+		scope="prototype">
+		<property name="passwordEncoder" ref="passwordEncoder" />
+		<property name="sysUsersDao" ref="sysUsersDao" />
+		<property name="userDetailsService" ref="UserDetailService" />
+		<property name="arthouseDao" ref="arthouse.dao" />
+		<property name="loguserDetailsService" ref="userDetailsService" />
+		<property name="photoTyperService" ref="photoTypeService" />
+	</bean>
+
+	<!-- 摄影作品 -->
+	<bean id="photoworksAction" class="com.arthouse.background.web.PhotoWorksAction"
+		scope="prototype">
+		<property name="photoTyperService" ref="photoTypeService" />
+		<property name="photoWorksService" ref="photoWorksService" />
+	</bean>
+	
+	<!-- 摄影作品主题 -->
+	<bean id="photoTopicAction" class="com.arthouse.background.web.PhotoTopicAction"
+		scope="prototype">
+		<property name="photoTyperService" ref="photoTypeService" />
+		<property name="photoWorksService" ref="photoWorksService" />
+	</bean>
+
+	<!-- 作品类型管理 -->
+	<bean id="photoTypeAction" class="com.arthouse.background.web.PhotoTypeAction"
+		scope="prototype">
+		<property name="photoTyperService" ref="photoTypeService" />
+	</bean>
+
+	<!-- 幻灯片导航管理 -->
+	<bean id="slideShowAction" class="com.arthouse.background.web.SlideShowAction"
+		scope="prototype">
+		<property name="photoWorksService" ref="photoWorksService" />
+	</bean>
+
+	<!-- 微电影 -->
+	<bean id="VideoShowAction" class="com.arthouse.background.web.VideoAction"
+		scope="prototype">
+		<property name="videoInfoService" ref="videoInfoService" />
+	</bean>
+
+	<!--团购订单 -->
+	<bean id="orderGroupAction" class="com.arthouse.background.web.OrderGroupAction"
+		scope="prototype">
+		<property name="orderService" ref="orderService" />
+	</bean>
+	
+	
+	
+
+	<!--新闻 -->
+	<bean id="newsAction" class="com.arthouse.background.web.NewsAction"
+		scope="prototype">
+		<property name="newsInfoservice" ref="newsService" />
+	</bean>
+
+	<!--工作室 -->
+	<bean id="studioIntroAction" class="com.arthouse.background.web.StudioIntroAction"
+		scope="prototype">
+		<property name="studioService" ref="studioService" />
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	<!--客片信息-->
+	<bean id="customerphotosAction" class="com.arthouse.background.web.CustomerPhotoAction"
+		scope="prototype">
+		<property name="customerService" ref="customerService" />
+	</bean>
+
+	<!-- 权限 -->
+	<bean id="UserAction" class="com.arthouse.background.systemManage.web.UserAction"
+		scope="prototype">
+		<property name="userService" ref="userService" />
+		<property name="userDetailsService" ref="userDetailsService" />
+	</bean>
+
+	<bean id="SysAuthorityAction"
+		class="com.arthouse.background.systemManage.web.SysAuthorityAction"
+		scope="prototype">
+		<property name="sysAuthorityService" ref="sysAuthorityService" />
+	</bean>
+
+	<bean id="RoleAction" class="com.arthouse.background.systemManage.web.RoleAction"
+		scope="prototype">
+		<property name="roleService" ref="roleService" />
+	</bean>
+
+	<bean id="ResourcesAction"
+		class="com.arthouse.background.systemManage.web.ResourcesAction"
+		scope="prototype">
+		<property name="resourceService" ref="resourceService" />
+	</bean>
+
+	<bean id="LogAction" class="com.arthouse.background.systemManage.web.LogAction"
+		scope="prototype">
+		<property name="logService" ref="logService" />
+	</bean>
+
+	<!-- 以上是后台部分 -->
+	<!-- 以下是网站部分 -->
+
+	<!-- 网站首页 -->
+	<bean id="indexAction" class="com.arthouse.goldfish.web.IndexAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+		<property name="photoTyperService" ref="photoTypeService" />
+	</bean>
+	
+	<bean id="photoListAction" class="com.arthouse.goldfish.web.PhotosListAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	<bean id="studionAction" class="com.arthouse.goldfish.web.StudioAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	<bean id="microFilmAction" class="com.arthouse.goldfish.web.MicroFilmAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	<bean id="newsinfoAction" class="com.arthouse.goldfish.web.NewsInfoAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	<bean id="customerPhotosShareAction" class="com.arthouse.goldfish.web.CustomerPhotoShareAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+	
+	
+	<!--团购展示-->
+	<bean id="GroupItemsAction" class="com.arthouse.goldfish.web.GroupPurchaseAction"
+		scope="prototype">
+		<property name="indexService" ref="indexService" />
+	</bean>
+
+</beans>

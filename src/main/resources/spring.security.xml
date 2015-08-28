@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<b:beans xmlns="http://www.springframework.org/schema/security"
+	xmlns:b="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+                        http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.0.xsd">
+
+	<!-- url过滤是按照顺序执行的,所以最前面的是最想先过滤的 1.form-login 指定了登陆界面,如果没具体指定,spring security将用自身的登陆界面,default-target-url: 
+		登录成功后转到那个页面 2.http-basic 加载系列默认的过滤器 3.logout 加载离开过滤器, logout-success-url: 
+		登出成功跳转到的页面(跳转) 4.max-sessions="1": 一个用户第二次登陆时,第一次失效 5.error-if-maximum-exceeded="true": 
+		防止第二次登陆 6. access-denied-page: 该用户无权限时转到指定页面(转向) -->
+	<http auto-config='true' access-denied-page="/acceessDenied.jsp">
+		<!--<intercept-url pattern="/**" access="ROLE_AD" /> -->
+		<intercept-url pattern="/login.jsp" filters="none" />
+		<intercept-url pattern="/css/**" filters="none" />
+		<intercept-url pattern="/images/**" filters="none" />
+		<intercept-url pattern="/js/**" filters="none" />
+		<intercept-url pattern="/login.action" filters="none" />
+		<intercept-url pattern="/sessionTimeout.jsp" filters="none" />
+		<intercept-url pattern="/main.action" access="ROLE_AD" />
+		<intercept-url pattern="/authCode.action" filters="none" />
+
+		<!--系统管理 -->
+		<intercept-url pattern="/user_ManageInit.action" access="ROLE_AD" />
+		<intercept-url pattern="/sysAuthority_Manage.action"
+			access="ROLE_AD" />
+		<intercept-url pattern="/role_ManageInit.action" access="ROLE_AD" />
+		<intercept-url pattern="/resources_Manage.action"
+			access="ROLE_AD" />
+		<intercept-url pattern="/notice_display.action" access="ROLE_AD" />
+		<intercept-url pattern="/bussupd_display.action" access="ROLE_AD" />
+		<intercept-url pattern="/check_display.action" access="ROLE_AD" />
+
+		<form-login login-page="/login.action"
+			authentication-failure-url="/login.action" default-target-url="/main.action" />
+		<logout logout-success-url="/login.action" />
+
+
+		<!-- 检测失效的sessionId,超时时定位到另外一个URL -->
+		<session-management invalid-session-url="/index.action" />
+
+		<!-- 增加一个自定义的filter，放在FILTER_SECURITY_INTERCEPTOR之前， 实现用户、角色、权限、资源的数据库管理。 -->
+		<custom-filter ref="customFilter" before="FILTER_SECURITY_INTERCEPTOR" />
+		<custom-filter ref="customLogoutFilter" before="LOGOUT_FILTER" />
+		<http-basic />
+
+		<!-- <session-management> <concurrency-control max-sessions="1" error-if-maximum-exceeded="true"/> 
+			</session-management> -->
+
+	</http>
+
+	<!-- 一个自定义的filter，必须包含authenticationManager, accessDecisionManager,securityMetadataSource三个属性。 -->
+	<b:bean id="customFilter"
+		class="com.arthouse.security.CustomFilterSecurityInterceptor">
+		<b:property name="authenticationManager" ref="authenticationManager" />
+		<b:property name="accessDecisionManager" ref="customAccessDecisionManager" />
+		<b:property name="securityMetadataSource" ref="customSecurityMetadataSource" />
+	</b:bean>
+
+	<b:bean id="customLogoutFilter"
+		class="org.springframework.security.web.authentication.logout.LogoutFilter">
+
+		<b:constructor-arg value="/login.action"></b:constructor-arg>
+		<b:constructor-arg>
+			<b:list>
+				<b:bean class="com.arthouse.security.SecurityLogoutHandler" />
+			</b:list>
+		</b:constructor-arg>
+	</b:bean>
+
+	<authentication-manager alias="authenticationManager">
+		<authentication-provider user-service-ref="userDetailsManager">
+			<password-encoder ref="passwordEncoder">
+				<salt-source user-property="username" />
+			</password-encoder>
+		</authentication-provider>
+	</authentication-manager>
+
+	<!-- 访问决策器，决定某个用户具有的角色，是否有足够的权限去访问某个资源。11/3/23 -->
+	<b:bean id="customAccessDecisionManager" class="com.arthouse.security.CustomAccessDecisionManager">
+	</b:bean>
+
+	<!-- 资源源数据定义，将所有的资源和权限对应关系建立起来，即定义某一资源可以被哪些角色去访问 -->
+	<b:bean id="customSecurityMetadataSource"
+		class="com.arthouse.security.CustomInvocationSecurityMetadataSourceService">
+		<b:property name="pubAuthoritiesResourcesDao" ref="sysAuthoritiesResourcesDao" />
+	</b:bean>
+
+
+</b:beans>
