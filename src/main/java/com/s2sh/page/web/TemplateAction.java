@@ -8,7 +8,7 @@ public class TemplateAction extends TemplateBaseAction {
 	public String page() throws Exception {
 		page = new Page(pageSize, pageIndex, true);
 		templateManager.getTemplateList(null, page);
-		System.out.println("svn ²âÊÔ");
+		System.out.println("svn æµ‹è¯•");
 		return SUCCESS;
 		
 	}
